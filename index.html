@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B&amp;K Sawdust Designs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Work+Sans:wght@400;500;600;700&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a workshop wall. Big gallery tiles lead, the shop stays quiet in a side drawer,
+   and a green recycled-wood band runs through the page like the ribbon on the logo. */
+:root{
+  color-scheme: light;
+  --paper:#fbf7ef;
+  --board:#f1e6d0;
+  --ink:#2b1a10;
+  --walnut:#5a2e14;
+  --teal:#157f8c;
+  --leaf:#2f7a33;
+  --leaf-deep:#1d4f22;
+  --ember:#c9591b;
+  --line:#dccdb0;
+  --display:"Bevan", Georgia, "Times New Roman", serif;
+  --script:"Yellowtail", "Brush Script MT", cursive;
+  --body:"Work Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--teal)}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.12;margin:0;text-wrap:balance;color:var(--walnut)}
+h2{font-size:clamp(1.7rem,3.6vw,2.5rem)}
+p{margin:0}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:4px}
+button{font:inherit;cursor:pointer}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:rgba(251,247,239,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:18px;min-height:64px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--walnut);font-family:var(--display);font-size:1.05rem;margin-right:auto}
+.brand img{width:46px;height:auto}
+.nav{display:flex;gap:20px;flex-wrap:wrap}
+.nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.nav a:hover{color:var(--teal)}
+.cartbtn{background:var(--walnut);color:#fff6df;border:0;border-radius:999px;padding:9px 16px;font-weight:600;display:flex;gap:8px;align-items:center}
+.cartbtn span{background:#fff6df;color:var(--walnut);border-radius:999px;min-width:22px;padding:0 6px;font-size:.85rem;font-variant-numeric:tabular-nums;text-align:center}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;padding-top:44px;padding-bottom:44px}
+.hero h1{font-size:clamp(2.1rem,5vw,3.6rem)}
+.hero h1 em{font-family:var(--script);font-style:normal;color:var(--leaf);font-size:1.15em;white-space:nowrap}
+.hero p.lead{font-size:1.15rem;max-width:34em;margin-top:18px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-block;text-decoration:none;font-weight:700;border-radius:8px;padding:12px 20px;border:2px solid var(--walnut);background:var(--walnut);color:#fff6df}
+.btn.ghost{background:transparent;color:var(--walnut)}
+.btn:hover{filter:brightness(1.1)}
+.hero figure{margin:0;justify-self:center}
+.hero figure img{width:min(440px,100%)}
+.seal{display:inline-flex;align-items:center;gap:10px;background:var(--leaf);color:#fff6df;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;padding:7px 14px;border-radius:999px;margin-bottom:18px}
+.seal b{font-size:1.25rem;line-height:1;font-weight:400}
+
+/* recycled band */
+.band{background:var(--leaf-deep);color:#f3f8ea;background-image:repeating-linear-gradient(92deg,rgba(255,255,255,.035) 0 2px,transparent 2px 46px)}
+.band .wrap{padding-top:52px;padding-bottom:56px}
+.band h2{color:#fff6df}
+.band h2 span{font-family:var(--script);color:#a9e09f;font-size:1.2em}
+.band .intro{max-width:40em;margin-top:14px;font-size:1.08rem}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px;list-style:none;padding:0;counter-reset:s}
+.steps li{counter-increment:s;border-top:3px solid #a9e09f;padding-top:14px}
+.steps li::before{content:counter(s);font-family:var(--display);font-size:1.6rem;color:#a9e09f;display:block}
+.steps h3{color:#fff6df;font-size:1.15rem;margin:4px 0 6px}
+.steps p{font-size:.98rem;color:#dbe9d2}
+
+/* gallery */
+.work .wrap{padding-top:56px;padding-bottom:60px}
+.head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.head p{max-width:36em;margin-top:8px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:2px solid var(--walnut);background:transparent;color:var(--walnut);border-radius:999px;padding:6px 14px;font-weight:600;font-size:.9rem}
+.chip[aria-pressed="true"]{background:var(--walnut);color:#fff6df}
+.note{margin-top:18px;background:var(--board);border-left:4px solid var(--ember);padding:10px 14px;font-size:.92rem;border-radius:0 6px 6px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:26px;margin-top:26px}
+.piece{display:flex;flex-direction:column;gap:10px}
+.art{position:relative;aspect-ratio:1/1;border-radius:6px;overflow:hidden;box-shadow:0 2px 0 var(--walnut),0 10px 22px -12px rgba(43,26,16,.55)}
+.art canvas{width:100%;height:100%;display:block}
+.art svg{position:absolute;inset:0;width:100%;height:100%;padding:11%}
+.tag{position:absolute;left:10px;top:10px;background:var(--leaf);color:#fff6df;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+.piece h3{font-size:1.12rem}
+.piece p{font-size:.95rem;color:#5b4636}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:4px}
+.price{font-weight:700;font-variant-numeric:tabular-nums}
+.add{background:transparent;border:0;color:var(--teal);font-weight:700;padding:6px 0;border-bottom:2px solid currentColor}
+.add:hover{color:var(--walnut)}
+
+/* about + custom */
+.two{background:var(--board);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.two .wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;padding-top:54px;padding-bottom:54px}
+.two p{margin-top:12px;max-width:34em}
+.two ul{margin:14px 0 0;padding-left:20px}
+.two li{margin:4px 0}
+footer .wrap{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-top:26px;padding-bottom:34px;font-size:.92rem}
+footer strong{color:var(--leaf)}
+
+/* cart drawer */
+.scrim{position:fixed;inset:0;background:rgba(43,26,16,.45);z-index:30}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(430px,100%);background:var(--paper);z-index:31;display:flex;flex-direction:column;box-shadow:-12px 0 30px rgba(43,26,16,.25)}
+.drawer header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.drawer header h2{font-size:1.4rem}
+.x{background:none;border:0;font-size:1.6rem;line-height:1;color:var(--walnut);padding:4px 8px}
+.drawer .body{overflow:auto;padding:16px 20px 24px;display:flex;flex-direction:column;gap:16px}
+.row{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.row .nm{font-weight:600}
+.row .amt{font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
+.qty{display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums}
+.qty button{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--walnut);background:transparent;color:var(--walnut);font-weight:700;line-height:1}
+.rm{background:none;border:0;color:var(--ember);font-size:.85rem;text-decoration:underline;padding:0;text-align:right}
+.total{display:flex;justify-content:space-between;font-family:var(--display);font-size:1.2rem;color:var(--walnut)}
+.fine{font-size:.88rem;color:#5b4636}
+form{display:flex;flex-direction:column;gap:10px}
+label{font-weight:600;font-size:.9rem;display:flex;flex-direction:column;gap:4px}
+input,textarea{font:inherit;padding:9px 10px;border:1.5px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+.summary{white-space:pre-wrap;background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:12px;font-size:.9rem;font-variant-numeric:tabular-nums}
+[hidden]{display:none!important}
+
+/* owner editing */
+.art img{width:100%;height:100%;object-fit:cover}
+.soldtag{position:absolute;right:10px;top:10px;background:var(--ember);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+.is-sold .art img,.is-sold .art canvas{filter:saturate(.55)}
+.edit{background:var(--board);border:1.5px solid var(--walnut);color:var(--walnut);border-radius:6px;padding:4px 12px;font-weight:600;font-size:.88rem;margin-left:auto}
+.owner{margin-top:18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;border:2px dashed var(--teal);border-radius:8px;padding:12px 14px}
+.owner p{flex:1 1 260px;font-size:.93rem}
+.modal{position:fixed;z-index:41;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto;background:var(--paper);border-radius:10px;padding:22px;box-shadow:0 20px 50px rgba(43,26,16,.4)}
+.modal h2{font-size:1.5rem;margin-bottom:14px}
+.modal .pair{display:grid;grid-template-columns:1fr 130px;gap:10px}
+.modal .check{flex-direction:row;align-items:center;gap:8px}
+.modal .check input{width:18px;height:18px}
+.modal .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.modal .danger{border-color:var(--ember);color:var(--ember);margin-left:auto}
+#scrim2{z-index:40}
+#edMsg{color:var(--ember);font-size:.9rem;min-height:1.2em}
+
+@media (max-width:820px){
+  .hero .wrap,.two .wrap{grid-template-columns:1fr}
+  .hero figure{order:-1}
+  .hero figure img{width:min(300px,100%)}
+  .steps{grid-template-columns:1fr}
+  .nav{order:3;width:100%;gap:16px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="logo.webp" alt=""><span>B&amp;K Sawdust Designs</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#work">The work</a>
+      <a href="#recycled">Recycled wood</a>
+      <a href="#about">About</a>
+      <a href="#custom">Custom orders</a>
+    </nav>
+    <button class="cartbtn" id="openCart" type="button">Cart <span id="count">0</span></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="seal"><b>&#9851;&#xFE0E;</b> Made with recycled wood</div>
+        <h1>Handmade wood crafts, given a <em>second life</em></h1>
+        <p class="lead">Every piece from our home workshop is cut, sanded and finished by hand, and built from recycled wood that would otherwise go to waste.</p>
+        <div class="cta">
+          <a class="btn" href="#work">See the work</a>
+          <a class="btn ghost" href="#recycled">Why recycled wood</a>
+        </div>
+      </div>
+      <figure><img src="logo.webp" width="678" height="720" alt="B&amp;K Sawdust Designs logo with a green ribbon reading Handmade from recycled wood"></figure>
+    </div>
+  </section>
+
+  <section class="band" id="recycled">
+    <div class="wrap">
+      <h2>Old wood, <span>new purpose</span></h2>
+      <p class="intro">We build with recycled wood. It keeps good lumber out of the landfill, and the nail holes, weathering and tight old grain give each piece a character new boards can't match.</p>
+      <ol class="steps">
+        <li><h3>Rescued</h3><p>We collect wood that has already served one purpose and is ready for another.</p></li>
+        <li><h3>Cleaned and milled</h3><p>Each board is de-nailed, cleaned, planed and sorted by grain and colour.</p></li>
+        <li><h3>Built by hand</h3><p>We cut, join, sand and finish every piece ourselves, so no two are the same.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2>The work</h2>
+          <p>A look at what comes out of the shop. Most pieces are one of a kind. If you see something you like, add it to your cart to ask about it, or ask us to make one for you.</p>
+        </div>
+        <div class="chips" id="chips" role="group" aria-label="Filter pieces"></div>
+      </div>
+      <div class="owner" id="ownerBar" hidden>
+        <p><strong>You're signed in as the shop owner.</strong> Add a piece, or use the Edit button on any piece to change its photo, price or details. Visitors don't see these controls.</p>
+        <button class="btn" type="button" id="addPiece">Add a piece</button>
+      </div>
+      <p class="note" id="sampleNote">Sample pieces are shown here until real photos are added.</p>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="two">
+    <div class="wrap">
+      <div id="about">
+        <h2>About the shop</h2>
+        <p>B&amp;K Sawdust Designs is a small home workshop. We make home decor, gifts and seasonal pieces, and we make them to last.</p>
+        <p>We work in small batches, so what you see here changes as pieces sell and new wood comes in.</p>
+      </div>
+      <div id="custom">
+        <h2>Custom orders</h2>
+        <p>Want a different size, a name on a sign, or a piece made from wood that means something to you? Tell us what you have in mind.</p>
+        <ul>
+          <li>Signs with your own wording</li>
+          <li>Pieces sized to fit your space</li>
+          <li>Keepsakes built from your own old boards</li>
+        </ul>
+        <div class="cta"><button class="btn" type="button" id="customBtn">Start a custom request</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="yr"></span> B&amp;K Sawdust Designs</span>
+    <strong>&#9851;&#xFE0E; Handmade from recycled wood</strong>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Cart" role="dialog" aria-modal="true">
+  <header><h2>Your cart</h2><button class="x" id="closeCart" type="button" aria-label="Close cart">&times;</button></header>
+  <div class="body">
+    <div id="items"></div>
+    <div class="total"><span>Subtotal</span><span id="subtotal">$0</span></div>
+    <form id="orderForm">
+      <label for="f-name">Your name<input id="f-name" required autocomplete="name"></label>
+      <label for="f-email">Email<input id="f-email" type="email" required autocomplete="email"></label>
+      <label for="f-notes">Notes or custom request<textarea id="f-notes"></textarea></label>
+      <button class="btn" type="submit">Prepare order request</button>
+      <p class="fine">Online payment isn't connected yet. This builds an order request you can copy and send to us. We'll reply to confirm availability, pickup or shipping, and payment.</p>
+    </form>
+    <div id="done" hidden>
+      <h3>Your order request</h3>
+      <p class="fine" style="margin:6px 0 10px">Nothing has been sent yet. Copy this and send it to B&amp;K Sawdust Designs.</p>
+      <div class="summary" id="summary"></div>
+      <div class="cta" style="margin-top:12px">
+        <button class="btn" type="button" id="copy">Copy order request</button>
+        <button class="btn ghost" type="button" id="back">Edit order</button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="scrim" id="scrim2" hidden></div>
+<div class="modal" id="editor" hidden role="dialog" aria-modal="true" aria-labelledby="edTitle">
+  <h2 id="edTitle">Edit piece</h2>
+  <form id="edForm">
+    <label for="e-name">Name<input id="e-name" required maxlength="80"></label>
+    <div class="pair">
+      <label for="e-cat">Category<input id="e-cat" list="catlist" maxlength="30" placeholder="Kitchen, Home, Garden"></label>
+      <label for="e-price">Price ($)<input id="e-price" inputmode="decimal" placeholder="Optional"></label>
+    </div>
+    <datalist id="catlist"></datalist>
+    <label for="e-desc">Description<textarea id="e-desc" maxlength="300"></textarea></label>
+    <label for="e-photo">Photo<input id="e-photo" type="file" accept="image/*"></label>
+    <p class="fine" id="photoState"></p>
+    <label class="check" for="e-wood"><input id="e-wood" type="checkbox"> Made with recycled wood (shows the green tag)</label>
+    <label class="check" for="e-sold"><input id="e-sold" type="checkbox"> Mark as sold</label>
+    <p id="edMsg" role="status"></p>
+    <div class="acts">
+      <button class="btn" type="submit" id="edSave">Save</button>
+      <button class="btn ghost" type="button" id="edCancel">Cancel</button>
+      <button class="btn ghost danger" type="button" id="edDelete">Delete piece</button>
+    </div>
+  </form>
+</div>
+
+<script>
+// Built-in illustrations used until a piece has its own photo.
+var ART = {
+  tray:'<rect x="8" y="38" width="84" height="26" rx="5"/><rect x="14" y="46" width="10" height="10" rx="4" class="cut"/><rect x="76" y="46" width="10" height="10" rx="4" class="cut"/>',
+  board:'<rect x="24" y="12" width="52" height="76" rx="10"/><circle cx="50" cy="24" r="5" class="cut"/>',
+  coasters:'<rect x="16" y="40" width="44" height="44" rx="7"/><rect x="28" y="28" width="44" height="44" rx="7"/><rect x="40" y="16" width="44" height="44" rx="7"/>',
+  shelf:'<rect x="6" y="36" width="88" height="10" rx="2"/><path d="M18 46h16v4L22 70h-4zM66 46h16v24h-4L66 50z"/>',
+  sign:'<path d="M28 34L50 12l22 22" class="rope"/><rect x="10" y="34" width="80" height="40" rx="4"/><path d="M24 54h52" class="rope"/>',
+  candle:'<rect x="8" y="50" width="84" height="28" rx="4"/><path d="M26 44c-5-7 0-10 0-16 5 6 5 9 0 16zM50 44c-5-7 0-10 0-16 5 6 5 9 0 16zM74 44c-5-7 0-10 0-16 5 6 5 9 0 16z"/>',
+  planter:'<path d="M12 48h76l-8 36H20z"/><path d="M30 46c-8-12-2-22 2-26 4 8 4 18-2 26zM50 46c-7-14-1-26 0-32 6 10 6 22 0 32zM70 46c-6-10-2-20 2-26 5 8 5 18-2 26z"/>',
+  bird:'<path d="M50 8l38 30h-8v48H20V38h-8z"/><circle cx="50" cy="50" r="9" class="cut"/><rect x="47" y="66" width="6" height="12" rx="3" class="cut"/>'
+};
+// Shown only when the saved list of pieces can't be loaded.
+var SAMPLE = [
+ {
+  "id": "c01",
+  "name": "Festive ornaments",
+  "cat": "Seasonal",
+  "desc": "Colourful snowmen, Santa hats, and seasonal details.",
+  "price": null,
+  "img": "photos/craft-1.jpg",
+  "wood": false,
+  "pos": "center",
+  "order": 15,
+  "sold": false
+ },
+ {
+  "id": "c02",
+  "name": "Hot cocoa caddies",
+  "cat": "Seasonal",
+  "desc": "Decorated wooden caddies with festive coffee and hot cocoa lettering.",
+  "price": null,
+  "img": "photos/craft-2.jpg",
+  "wood": true,
+  "pos": "center",
+  "order": 14,
+  "sold": false
+ },
+ {
+  "id": "c03",
+  "name": "Snowmen & reindeer",
+  "cat": "Seasonal",
+  "desc": "Hand-painted character ornaments with playful seasonal colour.",
+  "price": null,
+  "img": "photos/craft-3.jpg",
+  "wood": false,
+  "pos": "center",
+  "order": 13,
+  "sold": false
+ },
+ {
+  "id": "c04",
+  "name": "Christmas character details",
+  "cat": "Seasonal",
+  "desc": "A closer look at the snowman and reindeer decorations.",
+  "price": null,
+  "img": "photos/craft-4.jpg",
+  "wood": false,
+  "pos": "center",
+  "order": 12,
+  "sold": false
+ },
+ {
+  "id": "c05",
+  "name": "Round wooden stands",
+  "cat": "Home",
+  "desc": "Two wooden stands with round tops and warm stained finishes.",
+  "price": null,
+  "img": "photos/craft-5.jpg",
+  "wood": true,
+  "pos": "center 22%",
+  "order": 11,
+  "sold": false
+ },
+ {
+  "id": "c06",
+  "name": "Decorated wooden caddies",
+  "cat": "Home",
+  "desc": "A collection of patterned caddies, from festive plaid to maple leaves.",
+  "price": null,
+  "img": "photos/craft-6.jpg",
+  "wood": true,
+  "pos": "center",
+  "order": 10,
+  "sold": false
+ },
+ {
+  "id": "c07",
+  "name": "Painted keepsake box",
+  "cat": "Gifts",
+  "desc": "A hinged wooden box with a cream interior and colourful painted edges.",
+  "price": null,
+  "img": "photos/craft-7.jpg",
+  "wood": true,
+  "pos": "center",
+  "order": 9,
+  "sold": false
+ },
+ {
+  "id": "c08",
+  "name": "Spill the Tea box",
+  "cat": "Home",
+  "desc": "A cream-painted storage box with a chalkboard-style lid.",
+  "price": null,
+  "img": "photos/craft-8.jpg",
+  "wood": true,
+  "pos": "center",
+  "order": 8,
+  "sold": false
+ },
+ {
+  "id": "c09",
+  "name": "Rustic layered frame",
+  "cat": "Home",
+  "desc": "A wooden frame with a layered profile and weathered finish.",
+  "price": null,
+  "img": "photos/craft-9.jpg",
+  "wood": true,
+  "pos": "center",
+  "order": 7,
+  "sold": false
+ },
+ {
+  "id": "c10",
+  "name": "Warm wood frame",
+  "cat": "Home",
+  "desc": "A simple wooden frame that celebrates a warm natural finish.",
+  "price": null,
+  "img": "photos/craft-10.jpg",
+  "wood": true,
+  "pos": "center",
+  "order": 6,
+  "sold": false
+ },
+ {
+  "id": "c11",
+  "name": "Wooden-cover notebooks",
+  "cat": "Gifts",
+  "desc": "Hand-decorated notebook covers with painted colour and stitched lettering.",
+  "price": null,
+  "img": "photos/craft-11.jpg",
+  "wood": true,
+  "pos": "center",
+  "order": 5,
+  "sold": false
+ },
+ {
+  "id": "c12",
+  "name": "Game controller pen",
+  "cat": "Gifts",
+  "desc": "A colourful pen topped with a game controller detail.",
+  "price": null,
+  "img": "photos/craft-12.jpg",
+  "wood": false,
+  "pos": "center 30%",
+  "order": 4,
+  "sold": false
+ },
+ {
+  "id": "c13",
+  "name": "Decorative pen collection",
+  "cat": "Gifts",
+  "desc": "A colourful assortment of handmade decorative pens.",
+  "price": null,
+  "img": "photos/craft-13.jpg",
+  "wood": false,
+  "pos": "center",
+  "order": 3,
+  "sold": false
+ },
+ {
+  "id": "c14",
+  "name": "Rustic black pens",
+  "cat": "Gifts",
+  "desc": "Black textured pens with a rustic segmented design.",
+  "price": null,
+  "img": "photos/craft-14.jpg",
+  "wood": false,
+  "pos": "center",
+  "order": 2,
+  "sold": false
+ },
+ {
+  "id": "c15",
+  "name": "Pink & lavender vessels",
+  "cat": "Home",
+  "desc": "A coordinated collection with ribbed sides and contrasting painted colours.",
+  "price": null,
+  "img": "photos/craft-15.jpg",
+  "wood": false,
+  "pos": "center",
+  "order": 1,
+  "sold": false
+ }
+];
+var PIECES = SAMPLE.slice();
+var db = null, assets = null, canEdit = false, editing = null;
+
+var money = function(n){ return '$' + (Number(n) || 0).toFixed(2).replace(/\.00$/,''); };
+function priced(p){ return typeof p.price === 'number' && p.price >= 0; }
+function priceText(p){ return priced(p) ? money(p.price) : 'Price on request'; }
+var $ = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function find(id){ return PIECES.filter(function(x){ return x.id === id; })[0]; }
+
+var cart = {};
+try { cart = JSON.parse(localStorage.getItem('bk-cart') || '{}') || {}; } catch(e){ cart = {}; }
+function save(){ try { localStorage.setItem('bk-cart', JSON.stringify(cart)); } catch(e){} }
+
+// wood-grain tile behind each illustrated piece
+function grain(cv, hue, seed){
+  var c = cv.getContext('2d'), w = cv.width, h = cv.height, s = seed * 9301 + 49297;
+  function r(){ s = (s * 9301 + 49297) % 233280; return s / 233280; }
+  var planks = 4, ph = h / planks;
+  for (var p = 0; p < planks; p++){
+    var l = 30 + r() * 16;
+    c.fillStyle = 'hsl(' + (hue + r()*8 - 4) + ',48%,' + l + '%)';
+    c.fillRect(0, p*ph, w, ph);
+    for (var i = 0; i < 16; i++){
+      var y = p*ph + r()*ph, a = 2 + r()*5, f = .004 + r()*.012, o = r()*6;
+      c.strokeStyle = 'hsla(' + hue + ',55%,' + (r() > .5 ? l-12 : l+10) + '%,' + (.18 + r()*.3) + ')';
+      c.lineWidth = .6 + r()*1.6;
+      c.beginPath();
+      for (var x = 0; x <= w; x += 8){ var yy = y + Math.sin(x*f + o)*a; if (x) c.lineTo(x, yy); else c.moveTo(x, yy); }
+      c.stroke();
+    }
+    c.fillStyle = 'rgba(30,14,6,.55)'; c.fillRect(0, p*ph, w, 2);
+    c.fillRect(r()*w, p*ph, 2, ph);
+  }
+  var g = c.createRadialGradient(w/2, h/2, h*.2, w/2, h/2, h*.85);
+  g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(20,8,2,.45)');
+  c.fillStyle = g; c.fillRect(0, 0, w, h);
+}
+
+var filter = 'All';
+function cats(){ return PIECES.map(function(p){ return p.cat || 'Other'; }).filter(function(c,i,a){ return a.indexOf(c) === i; }); }
+function drawChips(){
+  var list = ['All'].concat(cats());
+  if (list.indexOf(filter) < 0) filter = 'All';
+  $('chips').innerHTML = list.map(function(c){
+    return '<button type="button" class="chip" data-cat="'+esc(c)+'" aria-pressed="'+(c===filter)+'">'+esc(c)+'</button>';
+  }).join('');
+  $('catlist').innerHTML = cats().map(function(c){ return '<option value="'+esc(c)+'">'; }).join('');
+}
+function drawGrid(){
+  var list = PIECES.filter(function(p){ return filter === 'All' || (p.cat || 'Other') === filter; });
+  $('grid').innerHTML = list.map(function(p, i){
+    var hue = Number(p.hue) || 22, art;
+    var pos = /^[a-z0-9% ]{1,24}$/.test(p.pos || '') ? p.pos : 'center';
+    if (p.photo) art = '<img src="/_blob/'+encodeURIComponent(p.photo)+'" alt="'+esc(p.name)+'" loading="lazy">';
+    else if (/^photos\/[\w.-]+$/.test(p.img || '')) art = '<img src="'+p.img+'" alt="'+esc(p.name)+'" loading="lazy" style="object-position:'+pos+'">';
+    else art = '<canvas width="480" height="360" data-hue="'+hue+'" data-seed="'+(i+3)+'"></canvas>'
+      + (ART[p.art] ? '<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="#f6e3bd" stroke="#2b1a10" stroke-width="2.2" stroke-linejoin="round">'+ART[p.art]+'</g></svg>' : '');
+    return '<article class="piece'+(p.sold ? ' is-sold' : '')+'">'
+      + '<div class="art">'+art+(p.wood === false ? '' : '<span class="tag">&#9851;&#xFE0E; Recycled wood</span>')+(p.sold ? '<span class="soldtag">Sold</span>' : '')+'</div>'
+      + '<h3>'+esc(p.name)+'</h3><p>'+esc(p.desc)+'</p>'
+      + '<div class="buy"><span class="price">'+priceText(p)+'</span>'
+      + (canEdit ? '<button type="button" class="edit" data-edit="'+esc(p.id)+'">Edit</button>' : '')
+      + (p.sold ? '<span class="fine">Ask us to make another</span>' : '<button type="button" class="add" data-add="'+esc(p.id)+'">Add to cart</button>')
+      + '</div></article>';
+  }).join('') || '<p>No pieces to show yet.</p>';
+  Array.prototype.forEach.call(document.querySelectorAll('#grid canvas'), function(cv){ grain(cv, +cv.dataset.hue, +cv.dataset.seed); });
+  Array.prototype.forEach.call(document.querySelectorAll('#grid .cut'), function(n){ n.setAttribute('fill','#3a1f0f'); });
+  Array.prototype.forEach.call(document.querySelectorAll('#grid .rope'), function(n){ n.setAttribute('fill','none'); });
+  $('sampleNote').hidden = PIECES.some(function(p){ return p.photo || p.img; });
+  $('ownerBar').hidden = !canEdit;
+}
+function lines(){
+  return Object.keys(cart).map(function(id){ var p = find(id); return p ? {p:p, q:cart[id]} : null; }).filter(Boolean);
+}
+function drawCart(){
+  var ls = lines(), n = 0, sum = 0;
+  var open = false;
+  ls.forEach(function(l){ n += l.q; if (priced(l.p)) sum += l.q * l.p.price; else open = true; });
+  $('count').textContent = n;
+  $('subtotal').textContent = open ? (sum ? money(sum) + ' plus pieces priced on request' : 'To be confirmed') : money(sum);
+  $('items').innerHTML = ls.length ? ls.map(function(l){
+    return '<div class="row"><span class="nm">'+esc(l.p.name)+'</span><span class="amt">'+(priced(l.p) ? money(l.q*l.p.price) : 'On request')+'</span>'
+      + '<span class="qty"><button type="button" data-q="-1" data-id="'+esc(l.p.id)+'" aria-label="One fewer '+esc(l.p.name)+'">&minus;</button>'+l.q
+      + '<button type="button" data-q="1" data-id="'+esc(l.p.id)+'" aria-label="One more '+esc(l.p.name)+'">+</button></span>'
+      + '<button type="button" class="rm" data-rm="'+esc(l.p.id)+'">Remove</button></div>';
+  }).join('') : '<p class="fine">Your cart is empty. You can still send a custom request using the notes box below.</p>';
+}
+function redraw(){ drawChips(); drawGrid(); drawCart(); }
+
+function openCart(focusNotes){
+  $('drawer').hidden = false; $('scrim').hidden = false;
+  $('done').hidden = true; $('orderForm').hidden = false;
+  (focusNotes ? $('f-notes') : $('closeCart')).focus();
+}
+function closeCart(){ $('drawer').hidden = true; $('scrim').hidden = true; $('openCart').focus(); }
+
+// ---- owner-only editor ----
+function openEditor(id){
+  var p = id ? find(id) : null;
+  editing = p ? JSON.parse(JSON.stringify(p)) : {id:null};
+  $('edTitle').textContent = p ? 'Edit piece' : 'Add a piece';
+  $('e-name').value = p ? p.name || '' : '';
+  $('e-cat').value = p ? p.cat || '' : '';
+  $('e-price').value = p && priced(p) ? p.price : '';
+  $('e-wood').checked = p ? p.wood !== false : true;
+  $('e-desc').value = p ? p.desc || '' : '';
+  $('e-sold').checked = !!(p && p.sold);
+  $('e-photo').value = '';
+  $('photoState').textContent = p && (p.photo || p.img) ? 'This piece has a photo. Choose a new one to replace it.' : 'No photo yet. An illustrated tile is shown until you add one.';
+  $('edMsg').textContent = '';
+  $('edDelete').hidden = !p; $('edDelete').textContent = 'Delete piece'; $('edDelete').dataset.armed = '';
+  $('edSave').disabled = false;
+  $('editor').hidden = false; $('scrim2').hidden = false; $('e-name').focus();
+}
+function closeEditor(){ $('editor').hidden = true; $('scrim2').hidden = true; editing = null; }
+
+$('edForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  if (!db || !editing) return;
+  var raw = $('e-price').value.trim().replace(/^\$/, ''), price = raw === '' ? null : parseFloat(raw);
+  if (raw !== '' && !(price >= 0)){ $('edMsg').textContent = 'Enter a price as a number, such as 45, or leave it empty.'; return; }
+  var data = {
+    name: $('e-name').value.trim(), cat: $('e-cat').value.trim() || 'Other', price: price,
+    desc: $('e-desc').value.trim(), sold: $('e-sold').checked, wood: $('e-wood').checked,
+    hue: Number(editing.hue) || 12 + Math.floor(Math.random()*22),
+    order: Number(editing.order) || Date.now()
+  };
+  if (editing.art) data.art = editing.art;
+  if (editing.photo) data.photo = editing.photo;
+  if (editing.img) data.img = editing.img;
+  if (editing.pos) data.pos = editing.pos;
+  var file = $('e-photo').files[0], id = editing.id;
+  $('edSave').disabled = true; $('edMsg').textContent = file ? 'Uploading photo…' : 'Saving…';
+  var step = Promise.resolve();
+  if (file){
+    if (!assets){ $('edMsg').textContent = 'Photo upload is not available in this view. Remove the photo to save the other changes.'; $('edSave').disabled = false; return; }
+    step = assets.upload(file).then(function(up){ data.photo = up.id; });
+  }
+  step.then(function(){
+    var col = db.collection('pieces');
+    return (id ? col.doc(id) : col.doc()).set(data);
+  }).then(closeEditor, function(err){
+    $('edSave').disabled = false;
+    $('edMsg').textContent = 'That could not be saved' + (err && err.message ? ': ' + err.message : '') + '. Check the photo is an image under 20 MB and try again.';
+  });
+});
+$('edDelete').onclick = function(){
+  var b = this;
+  if (!b.dataset.armed){ b.dataset.armed = '1'; b.textContent = 'Click again to delete for good'; return; }
+  if (!db || !editing || !editing.id) return;
+  var id = editing.id;
+  db.collection('pieces').doc(id).delete().then(function(){ delete cart[id]; save(); closeEditor(); },
+    function(){ $('edMsg').textContent = 'That could not be deleted. Try again.'; });
+};
+$('edCancel').onclick = closeEditor;
+$('scrim2').onclick = closeEditor;
+$('addPiece').onclick = function(){ openEditor(null); };
+
+document.addEventListener('click', function(e){
+  var t = e.target.closest('button'); if (!t) return;
+  if (t.dataset.cat){ filter = t.dataset.cat; drawChips(); drawGrid(); }
+  if (t.dataset.edit){ openEditor(t.dataset.edit); }
+  if (t.dataset.add){ cart[t.dataset.add] = (cart[t.dataset.add]||0) + 1; save(); drawCart(); t.textContent = 'Added. Add another'; }
+  if (t.dataset.q){ var id = t.dataset.id; cart[id] = (cart[id]||0) + (+t.dataset.q); if (cart[id] < 1) delete cart[id]; save(); drawCart(); }
+  if (t.dataset.rm){ delete cart[t.dataset.rm]; save(); drawCart(); }
+});
+$('openCart').onclick = function(){ openCart(false); };
+$('customBtn').onclick = function(){ openCart(true); };
+$('closeCart').onclick = closeCart;
+$('scrim').onclick = closeCart;
+document.addEventListener('keydown', function(e){
+  if (e.key !== 'Escape') return;
+  if (!$('editor').hidden) closeEditor(); else if (!$('drawer').hidden) closeCart();
+});
+
+$('orderForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var ls = lines(), sum = 0, notes = $('f-notes').value.trim();
+  if (!ls.length && !notes){ $('f-notes').focus(); $('f-notes').placeholder = 'Add a piece to your cart or describe what you would like'; return; }
+  var out = ['Order request for B&K Sawdust Designs', '', 'Name: ' + $('f-name').value.trim(), 'Email: ' + $('f-email').value.trim(), ''];
+  ls.forEach(function(l){ if (priced(l.p)) sum += l.q*l.p.price; out.push(l.q + ' x ' + l.p.name + '  ' + (priced(l.p) ? money(l.q*l.p.price) : 'price on request')); });
+  if (sum) out.push('Subtotal of priced pieces: ' + money(sum));
+  if (notes) out.push('', 'Notes: ' + notes);
+  $('summary').textContent = out.join('\n');
+  $('orderForm').hidden = true; $('done').hidden = false; $('copy').textContent = 'Copy order request';
+});
+$('back').onclick = function(){ $('done').hidden = true; $('orderForm').hidden = false; };
+$('copy').onclick = function(){
+  var b = this, txt = $('summary').textContent;
+  try {
+    navigator.clipboard.writeText(txt).then(function(){ b.textContent = 'Copied'; }, function(){ b.textContent = 'Select the text above to copy'; });
+  } catch(err){ b.textContent = 'Select the text above to copy'; }
+};
+
+$('yr').textContent = new Date().getFullYear();
+redraw();
+
+// Saved pieces: load the live list, and switch on editing for the owner.
+(async function(){
+  if (!window.claude || !window.claude.use) return;
+  try { db = await window.claude.use('db'); } catch(e){ db = null; }
+  if (!db) return;
+  db.collection('pieces').orderBy('order', 'desc').onSnapshot(function(snap){
+    PIECES = snap.empty ? SAMPLE.slice() : snap.docs.map(function(d){ return Object.assign({}, d.data(), {id: d.id}); });
+    redraw();
+  }, function(){});
+  try {
+    var user = await window.claude.use('user');
+    assets = await window.claude.use('assets');
+    canEdit = !!(user && await user.canEdit());
+  } catch(e){ canEdit = false; }
+  if (canEdit) drawGrid();
+})();
+</script>
+</body>
+</html>
